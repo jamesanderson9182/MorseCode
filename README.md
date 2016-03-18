@@ -1,5 +1,5 @@
 # Morse Code Translator
-##Tidied version of code started at a Careers Fair in Queen's University set by a company from Lurgan called GCD
+##Tidied version of code started at a Careers Fair in Queen's University
 
 Pass in a .txt file into the method in the main method or use the example.
 
