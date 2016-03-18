@@ -61,11 +61,11 @@ public class MorseCodeTranslator {
         morse.put('0', "-----");
         morse.put('.', ".-.-.-");
 
-        readInEncodedMessage();//reads the file into theEncodedMessage (this is a String)
+        theEncodedMessage = readInEncodedMessage("src/encodedMessage.txt");//reads the file into theEncodedMessage (this is a String)
 
         wordArray = theEncodedMessage.split(" / ");//Break the message up into an array of words based on:
         stringBuilder = new StringBuilder();
-        
+
         translateMap = reverseAHashMap(morse);//reverse the morse code hash map
 
         for(int i = 0; i < wordArray.length; i++)
@@ -86,17 +86,20 @@ public class MorseCodeTranslator {
      * Reads in the text file
      * TODO make this return a String and pass in a file path
      */
-    public static void readInEncodedMessage()
+    public static String readInEncodedMessage(String filePath)
     {
         try
+
         {
-            scanner = new Scanner(new FileReader("src/encodedMessage.txt"));
+            //"src/encodedMessage.txt"
+            scanner = new Scanner(new FileReader(filePath));
             theEncodedMessage = scanner.nextLine();
             scanner.close();
         } catch (FileNotFoundException e)
         {
             e.printStackTrace();
         }
+        return theEncodedMessage;
     }
 
     /**
@@ -108,7 +111,7 @@ public class MorseCodeTranslator {
      * @return the reversed HashMap
      */
     public static <String, Character> HashMap<String, Character> reverseAHashMap(HashMap<Character, String> originalHashMap) {
-        HashMap<String, Character> reversedHashMap = new HashMap<String, Character>();
+        HashMap<String, Character> reversedHashMap = new HashMap<>();
         for(HashMap.Entry<Character, String> entry : originalHashMap.entrySet())
             reversedHashMap.put(entry.getValue(), entry.getKey());
         return reversedHashMap;
