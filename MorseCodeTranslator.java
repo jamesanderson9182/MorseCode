@@ -2,16 +2,15 @@
  * My new solution to GCD Morse code challenge
  * Created by James Anderson
  */
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Scanner;
 
-
 public class MorseCodeTranslator {
     //Variables
-    private static String theEncodedMessage,currentWord,currentLetter;
+    private static String theEncodedMessage, currentWord, currentLetter;
 
     private static HashMap<Character, String> morse = new HashMap<>();
     private static HashMap<String, Character> translateMap = new HashMap<>();
@@ -20,37 +19,41 @@ public class MorseCodeTranslator {
     private static StringBuilder stringBuilder;
     private static Scanner scanner;
 
-    //Main method
+    /**
+     * Main Method
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         //Create HashMap of the morse code values
         morse.put('A', ".-");
         morse.put('B', "-...");
         morse.put('C', "-.-.");
-        morse.put('D',  "-..");
-        morse.put('E',    ".");
+        morse.put('D', "-..");
+        morse.put('E', ".");
         morse.put('F', "..-.");
-        morse.put('G',  "--.");
+        morse.put('G', "--.");
         morse.put('H', "....");
-        morse.put('I',   "..");
+        morse.put('I', "..");
         morse.put('J', ".---");
-        morse.put('K',   "-.");
+        morse.put('K', "-.");
         morse.put('L', ".-..");
-        morse.put('M',   "--");
-        morse.put('N',   "-.");
-        morse.put('O',  "---");
+        morse.put('M', "--");
+        morse.put('N', "-.");
+        morse.put('O', "---");
         morse.put('P', ".--.");
         morse.put('Q', "--.-");
         morse.put('R', ".-.");
-        morse.put('S',  "...");
-        morse.put('T',   "-");
-        morse.put('U',  "..-");
+        morse.put('S', "...");
+        morse.put('T', "-");
+        morse.put('U', "..-");
         morse.put('V', "...-");
-        morse.put('W',  ".--");
+        morse.put('W', ".--");
         morse.put('X', "-..-");
         morse.put('Y', "-.--");
         morse.put('Z', "--..");
         morse.put('1', ".----");
-        morse.put('2',"..---");
+        morse.put('2', "..---");
         morse.put('3', "...--");
         morse.put('4', "....-");
         morse.put('5', ".....");
@@ -61,46 +64,42 @@ public class MorseCodeTranslator {
         morse.put('0', "-----");
         morse.put('.', ".-.-.-");
 
-        theEncodedMessage = readInEncodedMessage("src/encodedMessage.txt");//reads the file into theEncodedMessage (this is a String)
+        /*reads the file into theEncodedMessage (this is a String)*/
+        theEncodedMessage = readInEncodedMessage("src/encodedMessage.txt");
 
-        wordArray = theEncodedMessage.split(" / ");//Break the message up into an array of words based on:
+        /*Break the message up into an array of words based on: space forward-slash space*/
+        wordArray = theEncodedMessage.split(" / ");
+
+        /*reverse the morse code hash map*/
+        translateMap = reverseAHashMap(morse);
+
+        /*Set up string builder that will build the translated String character by character */
         stringBuilder = new StringBuilder();
 
-        translateMap = reverseAHashMap(morse);//reverse the morse code hash map
-
-        for(int i = 0; i < wordArray.length; i++)
-        {
-            currentWord = wordArray[i];
-            currentLetterArray = currentWord.split(" ");//Break letters of a word up by spaces
-            for(int j = 0; j < currentLetterArray.length; j++)
-            {
-                currentLetter  = currentLetterArray[j];
-               stringBuilder.append(translateMap.get(currentLetter));
+        /*Loop to go through each letter in the sequence*/
+        for (int i = 0; i < wordArray.length; i++) {
+            currentWord = wordArray[i];//First word
+            currentLetterArray = currentWord.split(" ");//Break letters of word at i by spaces
+            for (int j = 0; j < currentLetterArray.length; j++) {
+                stringBuilder.append(translateMap.get(currentLetterArray[j]));//Did this in one line
             }
             stringBuilder.append(" ");//Add a space after every word
         }
-        System.out.println(stringBuilder.toString());
+        System.out.println(stringBuilder.toString());//Print out the final String
+        scanner.close();//Close the scanner object that was created when readInEncodedMessage was called
     }
 
     /**
-     *
-     * @param filePath as a string
+     * @param filePath as a String
      * @return the text file as a String
      */
-    public static String readInEncodedMessage(String filePath)
-    {
-        try
-
-        {
-            //"src/encodedMessage.txt"
-            scanner = new Scanner(new FileReader(filePath));
-            theEncodedMessage = scanner.nextLine();
-            scanner.close();
-        } catch (FileNotFoundException e)
-        {
+    public static String readInEncodedMessage(String filePath) {
+        try {
+            scanner = new Scanner(new FileReader(filePath));//Create the scanner object that points to the file path
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return theEncodedMessage;
+        return theEncodedMessage = scanner.nextLine();//Scanner reads the next line of text and stores it in theEncodedMessage
     }
 
     /**
@@ -113,12 +112,10 @@ public class MorseCodeTranslator {
      */
     public static <String, Character> HashMap<String, Character> reverseAHashMap(HashMap<Character, String> originalHashMap) {
         HashMap<String, Character> reversedHashMap = new HashMap<>();
-        for(HashMap.Entry<Character, String> entry : originalHashMap.entrySet())
+        for (HashMap.Entry<Character, String> entry : originalHashMap.entrySet())
             reversedHashMap.put(entry.getValue(), entry.getKey());
         return reversedHashMap;
     }
-
-
 }
 
 /*
