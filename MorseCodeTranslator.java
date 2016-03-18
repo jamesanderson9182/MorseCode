@@ -8,9 +8,10 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class MorseCodeTranslator {
+public class MorseCodeTranslator
+    {
     //Variables
-    private static String theEncodedMessage, currentWord, currentLetter;
+    private static String theEncodedMessage, currentWord;
 
     private static HashMap<Character, String> morse = new HashMap<>();
     private static HashMap<String, Character> translateMap = new HashMap<>();
@@ -24,7 +25,8 @@ public class MorseCodeTranslator {
      *
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)
+        {
         //Create HashMap of the morse code values
         morse.put('A', ".-");
         morse.put('B', "-...");
@@ -77,47 +79,53 @@ public class MorseCodeTranslator {
         stringBuilder = new StringBuilder();
 
         /*Loop to go through each letter in the sequence*/
-        for (int i = 0; i < wordArray.length; i++) {
+        for (int i = 0; i < wordArray.length; i++)
+            {
             currentWord = wordArray[i];//First word
             currentLetterArray = currentWord.split(" ");//Break letters of word at i by spaces
-            for (int j = 0; j < currentLetterArray.length; j++) {
+            for (int j = 0; j < currentLetterArray.length; j++)
+                {
                 stringBuilder.append(translateMap.get(currentLetterArray[j]));//Did this in one line
-            }
+                }
             stringBuilder.append(" ");//Add a space after every word
-        }
+            }
         System.out.println(stringBuilder.toString());//Print out the final String
         scanner.close();//Close the scanner object that was created when readInEncodedMessage was called
-    }
+        }
 
     /**
      * @param filePath as a String
      * @return the text file as a String
      */
-    public static String readInEncodedMessage(String filePath) {
-        try {
+    public static String readInEncodedMessage(String filePath)
+        {
+        try
+            {
             scanner = new Scanner(new FileReader(filePath));//Create the scanner object that points to the file path
-        } catch (FileNotFoundException e) {
+            } catch (FileNotFoundException e)
+            {
             e.printStackTrace();
-        }
+            }
         return theEncodedMessage = scanner.nextLine();//Scanner reads the next line of text and stores it in theEncodedMessage
-    }
+        }
 
     /**
-     * Reverses the key and string of a HashMap
+     * Reverses the key and value of a HashMap
      * TODO make this generic
+     *
      * @param originalHashMap
      * @param <String>
      * @param <Character>
      * @return the reversed HashMap
      */
-    public static <String, Character> HashMap<String, Character> reverseAHashMap(HashMap<Character, String> originalHashMap) {
-        HashMap<String, Character> reversedHashMap = new HashMap<>();
-        for (HashMap.Entry<Character, String> entry : originalHashMap.entrySet())
-            reversedHashMap.put(entry.getValue(), entry.getKey());
+    public static <String, Character> HashMap<String, Character> reverseAHashMap(HashMap<Character, String> originalHashMap)
+        {
+        HashMap<String, Character> reversedHashMap = new HashMap<>();//the new hash map
+        for (HashMap.Entry<Character, String> entry : originalHashMap.entrySet())//enhanced for loop
+            reversedHashMap.put(entry.getValue(), entry.getKey());//assign the value to the key and vice versa
         return reversedHashMap;
+        }
     }
-}
-
 /*
 Result:
 IF THE PRESENCE OF ELECTRICITY CAN BE MADE VISIBLE IN ANY PART OF THE CIRCUIT,
