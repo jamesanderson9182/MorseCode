@@ -83,8 +83,9 @@ public class MorseCodeTranslator {
     }
 
     /**
-     * Reads in the text file
-     * TODO make this return a String and pass in a file path
+     *
+     * @param filePath as a string
+     * @return the text file as a String
      */
     public static String readInEncodedMessage(String filePath)
     {
