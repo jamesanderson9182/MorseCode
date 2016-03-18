@@ -10,21 +10,13 @@ import java.util.Scanner;
 
 public class MorseCodeTranslator
     {
-    //Variables
     private static String theEncodedMessage, currentWord;
-
     private static HashMap<Character, String> morse = new HashMap<>();
     private static HashMap<String, Character> translateMap = new HashMap<>();
-
     private static String[] wordArray, currentLetterArray;
     private static StringBuilder stringBuilder;
     private static Scanner scanner;
 
-    /**
-     * Main Method
-     *
-     * @param args
-     */
     public static void main(String[] args)
         {
         //Create HashMap of the morse code values
@@ -66,15 +58,13 @@ public class MorseCodeTranslator
         morse.put('0', "-----");
         morse.put('.', ".-.-.-");
 
-        /*reads the file into theEncodedMessage (this is a String)*/
+        /*read the file into theEncodedMessage (this is a String)*/
         theEncodedMessage = readInEncodedMessage("src/encodedMessage.txt");
 
         /*Break the message up into an array of words based on: space forward-slash space*/
         wordArray = theEncodedMessage.split(" / ");
 
-        /*reverse the morse code hash map*/
-        translateMap = reverseAHashMap(morse);
-
+        translateMap = reverseAHashMap(morse);//reverse the morse code hash map
         /*Set up string builder that will build the translated String character by character */
         stringBuilder = new StringBuilder();
 
@@ -108,11 +98,9 @@ public class MorseCodeTranslator
             }
         return theEncodedMessage = scanner.nextLine();//Scanner reads the next line of text and stores it in theEncodedMessage
         }
-
     /**
      * Reverses the key and value of a HashMap
      * TODO make this generic
-     *
      * @param originalHashMap
      * @param <String>
      * @param <Character>
