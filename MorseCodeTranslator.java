@@ -57,6 +57,7 @@ public class MorseCodeTranslator
         morse.put('9', "----.");
         morse.put('0', "-----");
         morse.put('.', ".-.-.-");
+        morse.put(',', "--..--");
 
         /*read the file into theEncodedMessage (this is a String)*/
         theEncodedMessage = readInEncodedMessage("src/encodedMessage.txt");
