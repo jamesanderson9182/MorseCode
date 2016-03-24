@@ -46,7 +46,7 @@ class Morse
   }
   rev_morse_dict = morse_dict.invert
 
-  the_file_to_read_from = File.open("encoded_file.txt")
+  the_file_to_read_from = File.open("encodedMessage.txt")
   the_encoded_message = the_file_to_read_from.readline
   the_file_to_read_from.close
 
@@ -58,5 +58,5 @@ class Morse
     array_of_letters = i.split(" ")
     array_of_letters.each {|j| the_translation<<(rev_morse_dict[j])}
     the_translation<<" " }
-  puts "The translation is: #{the_translation}"
+  puts "The translation is: #{the_translation.upcase}"
 end
