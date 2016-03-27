@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class MorseCodeTranslator
     {
     private static String theEncodedMessage, currentWord;
-    private static HashMap<Character, String> morse = new HashMap<>();
+    private static final HashMap<Character, String> morse = new HashMap<>();
     private static HashMap<String, Character> translateMap = new HashMap<>();
     private static String[] wordArray, currentLetterArray;
     private static StringBuilder stringBuilder;
@@ -70,13 +70,13 @@ public class MorseCodeTranslator
         stringBuilder = new StringBuilder();
 
         /*Loop to go through each letter in the sequence*/
-        for (int i = 0; i < wordArray.length; i++)
+        for (String aWordArray : wordArray)
             {
-            currentWord = wordArray[i];//First word
+            currentWord = aWordArray;//First word
             currentLetterArray = currentWord.split(" ");//Break letters of word at i by spaces
-            for (int j = 0; j < currentLetterArray.length; j++)
+            for (String aCurrentLetterArray : currentLetterArray)
                 {
-                stringBuilder.append(translateMap.get(currentLetterArray[j]));//Did this in one line
+                stringBuilder.append(translateMap.get(aCurrentLetterArray));//Did this in one line
                 }
             stringBuilder.append(" ");//Add a space after every word
             }
@@ -102,9 +102,9 @@ public class MorseCodeTranslator
     /**
      * Reverses the key and value of a HashMap
      * TODO make this generic
-     * @param originalHashMap
-     * @param <String>
-     * @param <Character>
+     * @param originalHashMap that you want reversed
+     * @param <String> the key
+     * @param <Character> the value
      * @return the reversed HashMap
      */
     public static <String, Character> HashMap<String, Character> reverseAHashMap(HashMap<Character, String> originalHashMap)
