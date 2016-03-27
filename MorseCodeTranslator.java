@@ -99,12 +99,14 @@ public class MorseCodeTranslator
             }
         return theEncodedMessage = scanner.nextLine();//Scanner reads the next line of text and stores it in theEncodedMessage
         }
+
     /**
      * Reverses the key and value of a HashMap
      * TODO make this generic
+     *
      * @param originalHashMap that you want reversed
-     * @param <String> the key
-     * @param <Character> the value
+     * @param <String>        the key
+     * @param <Character>     the value
      * @return the reversed HashMap
      */
     public static <String, Character> HashMap<String, Character> reverseAHashMap(HashMap<Character, String> originalHashMap)
